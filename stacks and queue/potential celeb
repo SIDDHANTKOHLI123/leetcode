@@ -1,0 +1,64 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[][] arr = new int[n][n];
+
+        for (int j = 0; j < n; j++) {
+            String line = br.readLine();
+            for (int k = 0; k < n; k++) {
+                arr[j][k] = line.charAt(k) - '0';
+            }
+        }
+
+        findCelebrity(arr);
+
+    }
+
+    public static void findCelebrity(int[][] arr) {
+        // if a celebrity is there print it's index (not position), if there is not then
+        // print "none"
+        
+        //we will use elemination apporach to see who can be celeb , then we will check it rows that is doesnt know anyone and then column corrsponding to him that everyone knows him except for him
+        Stack<Integer> celeb=new Stack<>();
+        
+        for(int i=0;i<arr.length;i++){
+            
+            celeb.push(i);
+        }
+        
+        while(celeb.size()>=2){
+            
+            int i=celeb.pop();
+            int j=celeb.pop();
+            
+            if(arr[i][j]==1){
+                // then i knows j so it not celeb so j can be a celeb
+                celeb.push(j);
+            }
+            else{
+                celeb.push(i);
+            }
+        }
+        
+        int potentialceleb=celeb.pop();
+        
+        for(int i=0;i<arr.length;i++){
+            
+            if(i!=potentialceleb){
+                if(arr[i][potentialceleb]==0 || arr[potentialceleb][i]==1){
+                    System.out.println("none");
+                    return;
+                }
+            }
+        }
+        
+        System.out.println(potentialceleb);
+    }
+
+}
