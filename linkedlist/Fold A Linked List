@@ -1,0 +1,47 @@
+1. You are given a partially written LinkedList class.
+2. You are required to complete the body of fold function. The function is expected to place last element after 1st element, 2nd last element after 2nd element and so on. For more insight check the example
+
+Example 1
+1->2->3->4->5
+will fold as
+1->5->2->4->3
+
+Example 2
+1->2->3->4->5->6
+1->6->2->5->3->4
+
+
+
+
+    public void foldHelper(Node right,int floor){
+        
+        if(right==null){
+            return ;
+        }
+        foldHelper(right.next,floor+1);
+        
+        if(floor>size/2){
+        Node temp=fleft.next;
+        fleft.next=right;
+        right.next=temp;
+        fleft=temp;
+        }else if(floor==size/2){
+            tail=right;
+            tail.next=null;
+        }
+    }
+
+
+    Node fleft;
+    public void fold() {
+      // write your code here
+      //LinkedList newlink=new LinkedList();
+      fleft=head;
+      //foldHelper(head,newlink);
+      foldHelper(head,0);
+    //   this.head=newlink.head;
+    //   this.tail=newlink.tail;
+    //   this.size=newlink.size;
+
+    }
+  }

@@ -1,0 +1,29 @@
+1. You are given a partially written LinkedList class.
+2. You are required to complete the body of reverseDR function. The function is expected to reverse the linked list by using recursion and changing the "data" data member of nodes.
+3. Input and Output is managed for you. 
+
+Note -> The online judge can't force you to write recursive function, nor can it check if you changed the "data" data member or not. But that is what the expectation is, the intention in to help you learn.
+
+
+
+    public void reverseDRHelper(Node right,int floor){
+        
+        if(right==null){
+            return;
+        }
+        reverseDRHelper(right.next,floor+1);
+        
+        if(floor<size/2){
+            int temp=right.data;
+            right.data=rleft.data;
+            rleft.data=temp;
+        }
+        rleft=rleft.next;
+    }
+    Node rleft;
+    public void reverseDR() {
+      // write your code here
+      rleft=head;
+      reverseDRHelper(head,0);
+    }
+  }
