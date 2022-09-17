@@ -1,0 +1,43 @@
+1. You are given two sorted arrays(a,b) of integers.
+2. You have to merge them and form one sorted array.
+3. You have to do it in linear time complexity.
+
+
+  public static int[] mergeTwoSortedArrays(int[] a, int[] b){
+    //write your code here
+    int[] result=new int[a.length+b.length];
+    
+    int firstpointer=0;
+    int secondpointer=0;
+    int resultpointer=0;
+    
+    while(firstpointer<a.length && secondpointer<b.length){
+
+        if(a[firstpointer]<b[secondpointer]){
+
+            result[resultpointer]=a[firstpointer];
+            firstpointer++;
+            
+        }
+        else{
+
+            result[resultpointer]=b[secondpointer];
+            secondpointer++;
+        }
+        resultpointer++;
+    }
+    
+    while(firstpointer<a.length){
+        result[resultpointer]=a[firstpointer];
+        firstpointer++;
+         resultpointer++;
+    }
+    
+        while(secondpointer<b.length){
+        result[resultpointer]=b[secondpointer];
+        secondpointer++;
+         resultpointer++;
+    }
+    
+    return result;
+  }
