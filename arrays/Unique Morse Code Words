@@ -1,0 +1,41 @@
+International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows:
+
+'a' maps to ".-",
+'b' maps to "-...",
+'c' maps to "-.-.", and so on.
+For convenience, the full table for the 26 letters of the English alphabet is given below:
+
+[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+Given an array of strings words where each word can be written as a concatenation of the Morse code of each letter.
+
+For example, "cab" can be written as "-.-..--...", which is the concatenation of "-.-.", ".-", and "-...". We will call such a concatenation the transformation of a word.
+Return the number of different transformations among all words we have.
+
+
+
+
+
+class Solution {
+    public int uniqueMorseRepresentations(String[] words) {
+        
+        String[] referword={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        
+        Map<String, String> hashMap= new HashMap<String, String>();
+         int asciiValue = 97;
+        for(String str:referword){
+            char convertedChar = (char)asciiValue;
+            hashMap.put(String.valueOf(convertedChar),str);
+            asciiValue++;
+        }
+        
+        HashSet<String> set=new HashSet();  
+        for(int j=0;j<words.length;j++){
+            StringBuilder trans=new StringBuilder();
+            for(int i=0;i<words[j].length();i++){
+                trans.append(hashMap.get(String.valueOf(words[j].charAt(i))));
+            }
+            set.add(trans.toString());
+        }
+        
+        return set.size();
+    }
